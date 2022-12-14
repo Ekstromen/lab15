@@ -1,0 +1,75 @@
+#define _CRT_SECURE_NO_DEPRECATE
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+#include <math.h>
+#define N 7
+
+
+
+int main() {
+
+	int array[N][N];
+	int array1[N][N];
+	setlocale(LC_ALL, "rus");
+
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < N; j++) {
+			array[i][j] = (rand() % 21)-10;
+		}
+	}
+
+	for (int i = 0; i < N; i++) {
+		printf("\n");
+		for (int j = 0; j < N; j++) {
+			printf("%d\t",array[i][j]);
+		}
+		printf("\n");
+	}
+
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < N; j++) {
+			array1[i][j] = array[j][i];
+			array1[j][i] = array[i][j];
+		}
+	}
+	printf("\n");
+
+	for (int i = 0; i < N; i++) {
+		printf("\n");
+		for (int j = 0; j < N; j++) {
+			printf("%d\t", array1[i][j]);
+		}
+		printf("\n");
+	}
+
+	printf("\n");
+	
+	int sm = 0;
+	for (int i = 0; i < N; i++) {
+		if (array[i][1] > 10) sm += array[i][1];
+	}
+	printf("Сумма значений больше 10 во 2 столбце = %d",sm);
+
+	int count = 0;
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < N-1; j++) {
+			if (array[i][j] == array[i][j+1]) count++;
+		}
+	}
+	printf("Количество пар одинаковых элементов в строке = %d",count);
+
+	int maxx = array[0][0], size = N*N;
+	for (int i = 0; i < size; i++) {
+		if (array[i / N][i % N] >= array[maxx / N][maxx % N]) {
+			maxx = i;
+		}	
+	}
+
+	printf("\nmax = array[%d][%d] = %d\n", maxx/N, maxx%N, array[maxx/N][maxx%N]);
+}
+
+
+	
+
+

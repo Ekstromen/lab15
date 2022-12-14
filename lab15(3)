@@ -1,0 +1,34 @@
+#define _CRT_SECURE_NO_DEPRECATE
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+#include <math.h>
+#define N 4
+#define M 11
+
+int main() {
+	int array[M][N];
+	setlocale(LC_ALL, "rus");
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < M; j++) {
+			array[i][j] = rand() % 32;
+		}
+	}
+
+	for (int i = 0; i < N; i++) {
+		printf("\n");
+		for (int j = 0; j < M; j++) {
+		 	printf("%d\t", array[i][j]);
+		}
+		printf("\n");
+	}
+
+	int maxx = array[0][0], size = M * N;
+	for (int i = 0; i < size; i++) {
+		if (array[i / M][i % M] >= array[maxx / M][maxx % M]) {
+			maxx = i;
+		}
+	}
+
+	printf("\nБольше всего учеников в %d классе в %d параллели,  максимальное кол-во учеников = %d\n", (maxx / M)+1, (maxx % M)+1, array[maxx / M][maxx % M]);
+}
